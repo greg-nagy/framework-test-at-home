@@ -1,9 +1,7 @@
 use std::{convert::Infallible, io, sync::Arc};
 
 use axum::{async_trait, extract::FromRequestParts, http::request::Parts};
-use futures::StreamExt;
 
-use tokio::pin;
 use tokio_postgres::{connect, Client, NoTls, Statement};
 
 
@@ -57,9 +55,7 @@ impl PgConnection {
 
 impl PgConnection {
     pub async fn get_count(&self) -> Result<String, PgError> {
-        let stream = self.client.query_raw::<_, _, &[i32; 0]>(&self.count, &[]).await?;
-        pin!(stream);
-        let row = stream.next().await.unwrap()?;
+        let row = self.client.query_one(&self.count, &[]).await?;
         let value: i32 = row.get(0);
         Ok(value.to_string())
     }
