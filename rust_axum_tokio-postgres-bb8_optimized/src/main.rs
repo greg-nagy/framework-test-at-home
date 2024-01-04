@@ -20,35 +20,34 @@ async fn count(DatabaseConnection(conn): DatabaseConnection) -> impl IntoRespons
 }
 
 fn main() {
-    let rt = tokio::runtime::Builder::new_current_thread()
+    // let rt = tokio::runtime::Builder::new_current_thread()
+    //     .enable_all()
+    //     .build()
+    //     .unwrap();
+
+    // //for _ in 1..num_cpus::get() {
+    // for _ in 1..10 {
+    //     std::thread::spawn(move || {
+    //         let rt = tokio::runtime::Builder::new_current_thread()
+    //             .enable_all()
+    //             .build()
+    //             .unwrap();
+    //         rt.block_on(serve());
+    //     });
+    // }
+    // rt.block_on(serve());
+
+    let rt = tokio::runtime::Builder::new_multi_thread()
+        // .worker_threads(10) // specify the number of threads here
         .enable_all()
         .build()
-        .unwrap();
-
-    //for _ in 1..num_cpus::get() {
-    for _ in 1..10 {
-        std::thread::spawn(move || {
-            let rt = tokio::runtime::Builder::new_current_thread()
-                .enable_all()
-                .build()
-                .unwrap();
-            rt.block_on(serve());
-        });
-    }
-    rt.block_on(serve());
-
-// let rt = tokio::runtime::Builder::new_multi_thread()
-//     .worker_threads(10) // specify the number of threads here
-//     .enable_all()
-//     .build()
-//     .unwrap();    
+        .unwrap();    
 
     // for _ in 0..10 {
     //     rt.spawn(serve());
     // }
 
-    // // Keep the main thread alive until all tasks are complete
-    // rt.block_on(serve());
+    rt.block_on(serve());
 
 }
 
