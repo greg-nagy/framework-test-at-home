@@ -36,7 +36,7 @@ fn main() {
 }
 
 async fn serve() {
-    let database_url: String = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev".to_string();
+    let database_url: String = "postgresql://postgres:postgres@127.0.0.1:5432/portal_dev".to_string();
 
     // setup connection pool
     let pg_connection = PgConnection::connect(database_url).await;
