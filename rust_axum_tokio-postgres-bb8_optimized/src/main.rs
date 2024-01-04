@@ -5,8 +5,8 @@ use axum::{
     Router,
 };
 
-use std::{net::{SocketAddr, Ipv4Addr}, io};
-use tokio::net::{TcpListener, TcpSocket};
+// use std::{net::{SocketAddr, Ipv4Addr}, io};
+// use tokio::net::{TcpListener, TcpSocket};
 
 mod database;
 // mod server;
@@ -19,39 +19,9 @@ async fn count(DatabaseConnection(conn): DatabaseConnection) -> impl IntoRespons
     (StatusCode::OK, count)
 }
 
-fn main() {
-    // let rt = tokio::runtime::Builder::new_current_thread()
-    //     .enable_all()
-    //     .build()
-    //     .unwrap();
-
-    // //for _ in 1..num_cpus::get() {
-    // for _ in 1..10 {
-    //     std::thread::spawn(move || {
-    //         let rt = tokio::runtime::Builder::new_current_thread()
-    //             .enable_all()
-    //             .build()
-    //             .unwrap();
-    //         rt.block_on(serve());
-    //     });
-    // }
-    // rt.block_on(serve());
-
-    let rt = tokio::runtime::Builder::new_multi_thread()
-        // .worker_threads(10) // specify the number of threads here
-        .enable_all()
-        .build()
-        .unwrap();    
-
-    // for _ in 0..10 {
-    //     rt.spawn(serve());
-    // }
-
-    rt.block_on(serve());
-
-}
-
-async fn serve() {
+#[tokio::main]
+async fn main() {
+    // let database_url: String = std::env::var("DATABASE_URL").unwrap();
     let database_url: String = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev".to_string();
 
     // setup connection pool
@@ -62,28 +32,78 @@ async fn serve() {
         .route("/count", get(count))
         .with_state(pg_connection);
 
-    let addr = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3000));
-    let listener = reuse_listener(addr).expect("couldn't bind to addr");
 
     println!("Started axum server at 3000");
 
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
 
-fn reuse_listener(addr: SocketAddr) -> io::Result<TcpListener> {
-    let socket = match addr {
-        SocketAddr::V4(_) => TcpSocket::new_v4()?,
-        SocketAddr::V6(_) => TcpSocket::new_v6()?,
-    };
+// fn main() {
+//     // let rt = tokio::runtime::Builder::new_current_thread()
+//     //     .enable_all()
+//     //     .build()
+//     //     .unwrap();
 
-    #[cfg(unix)]
-    {
-        if let Err(e) = socket.set_reuseport(true) {
-            eprintln!("error setting SO_REUSEPORT: {e}");
-        }
-    }
+//     // //for _ in 1..num_cpus::get() {
+//     // for _ in 1..10 {
+//     //     std::thread::spawn(move || {
+//     //         let rt = tokio::runtime::Builder::new_current_thread()
+//     //             .enable_all()
+//     //             .build()
+//     //             .unwrap();
+//     //         rt.block_on(serve());
+//     //     });
+//     // }
+//     // rt.block_on(serve());
 
-    socket.set_reuseaddr(true)?;
-    socket.bind(addr)?;
-    socket.listen(1024)
-}
+//     let rt = tokio::runtime::Builder::new_multi_thread()
+//         // .worker_threads(10) // specify the number of threads here
+//         .enable_all()
+//         .build()
+//         .unwrap();    
+
+//     // for _ in 0..10 {
+//     //     rt.spawn(serve());
+//     // }
+
+//     rt.block_on(serve());
+
+// }
+
+// async fn serve() {
+//     let database_url: String = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev".to_string();
+
+//     // setup connection pool
+//     let pg_connection = PgConnection::connect(database_url).await;
+
+//     let app = Router::new()
+//         .route("/", get(|| async { "Hello, World!" }))
+//         .route("/count", get(count))
+//         .with_state(pg_connection);
+
+//     let addr = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3000));
+//     let listener = reuse_listener(addr).expect("couldn't bind to addr");
+
+//     println!("Started axum server at 3000");
+
+//     axum::serve(listener, app).await.unwrap();
+// }
+
+// fn reuse_listener(addr: SocketAddr) -> io::Result<TcpListener> {
+//     let socket = match addr {
+//         SocketAddr::V4(_) => TcpSocket::new_v4()?,
+//         SocketAddr::V6(_) => TcpSocket::new_v6()?,
+//     };
+
+//     #[cfg(unix)]
+//     {
+//         if let Err(e) = socket.set_reuseport(true) {
+//             eprintln!("error setting SO_REUSEPORT: {e}");
+//         }
+//     }
+
+//     socket.set_reuseaddr(true)?;
+//     socket.bind(addr)?;
+//     socket.listen(1024)
+// }
