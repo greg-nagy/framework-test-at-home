@@ -42,4 +42,5 @@ https://docs.google.com/spreadsheets/d/1qxV0QYc6v51SDrhph7MY6PEOdoGL_IYRNgvRJmV1
 
 #### Without nginx
 
-![t2micro-plain-text](./no-nginx-t2.micro-single-query.png)
+![t2micro-plain-text](./no-nginx-t2.micro-plain-text.png)
+![t2micro-single-query](./no-nginx-t2.micro-single-query.png)
