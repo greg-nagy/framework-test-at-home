@@ -1,3 +1,5 @@
+use std::env;
+
 use axum::{
     http::StatusCode,
     response::IntoResponse,
@@ -6,7 +8,6 @@ use axum::{
 };
 
 mod database;
-mod server;
 
 use self::database::{DatabaseConnection, PgConnection};
 
@@ -16,39 +17,23 @@ async fn count(DatabaseConnection(conn): DatabaseConnection) -> impl IntoRespons
     (StatusCode::OK, count)
 }
 
-fn main() {
-    let rt = tokio::runtime::Builder::new_current_thread()
-        .enable_all()
-        .build()
-        .unwrap();
+#[tokio::main]
+async fn main() {
+    let db_url = match env::var("DB_URL") {
+        Ok(value) => value,
+        Err(e) => {
+            println!("Couldn't read MY_ENV_VAR ({})", e);
+            return; // or handle the error as needed
+        },
+    };
 
-    //for _ in 1..num_cpus::get() {
-    for _ in 1..10 {
-        std::thread::spawn(move || {
-            let rt = tokio::runtime::Builder::new_current_thread()
-                .enable_all()
-                .build()
-                .unwrap();
-            rt.block_on(serve());
-        });
-    }
-    rt.block_on(serve());
-}
+    let pg_connection = PgConnection::connect(db_url).await;
 
-async fn serve() {
-    let database_url: String = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev".to_string();
-
-    // setup connection pool
-    let pg_connection = PgConnection::connect(database_url).await;
-
-    let router = Router::new()
+    let app = Router::new()
         .route("/", get(|| async { "Hello, World!" }))
         .route("/count", get(count))
         .with_state(pg_connection);
 
-    server::builder()
-        .serve(router.into_make_service())
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
 }
-
