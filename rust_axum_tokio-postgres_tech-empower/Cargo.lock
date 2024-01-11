@@ -36,19 +36,6 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "axum"
-version = "0.2.0"
-dependencies = [
- "axum 0.6.20",
- "futures",
- "futures-util",
- "hyper",
- "num_cpus",
- "tokio",
- "tokio-postgres",
-]
-
-[[package]]
-name = "axum"
 version = "0.6.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3b829e4e32b91e643de6eafe82b1d90675f5874230191a4ffbc1b336dec4d6bf"
@@ -677,6 +664,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4722d768eff46b75989dd134e5c353f0d6296e5aaa3132e776cbdb56be7731aa"
 dependencies = [
  "bitflags",
+]
+
+[[package]]
+name = "rust_axum_tokio-postgres_tech-empower"
+version = "0.2.0"
+dependencies = [
+ "axum",
+ "futures",
+ "futures-util",
+ "hyper",
+ "num_cpus",
+ "tokio",
+ "tokio-postgres",
 ]
 
 [[package]]
