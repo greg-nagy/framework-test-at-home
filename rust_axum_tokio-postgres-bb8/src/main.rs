@@ -1,3 +1,5 @@
+use std::env;
+
 use axum::{
     extract::State,
     http::StatusCode,
@@ -9,9 +11,15 @@ use bb8_postgres::{PostgresConnectionManager, tokio_postgres::NoTls};
 
 #[tokio::main]
 async fn main() {
-    let db_connection_string = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev";
+    let db_url = match env::var("DB_URL") {
+        Ok(value) => value,
+        Err(e) => {
+            println!("Couldn't read DB_URL ({})", e);
+            return; // or handle the error as needed
+        },
+    };    
     let manager =
-        PostgresConnectionManager::new_from_stringlike(db_connection_string, NoTls)
+        PostgresConnectionManager::new_from_stringlike(db_url, NoTls)
             .unwrap();
     let pool = Pool::builder()
         .max_size(30)

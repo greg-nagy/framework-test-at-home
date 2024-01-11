@@ -1,3 +1,5 @@
+use std::env;
+
 use axum::{
     http::StatusCode,
     response::IntoResponse,
@@ -36,10 +38,16 @@ fn main() {
 }
 
 async fn serve() {
-    let database_url: String = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev".to_string();
+    let db_url = match env::var("DB_URL") {
+        Ok(value) => value,
+        Err(e) => {
+            println!("Couldn't read DB_URL ({})", e);
+            return; // or handle the error as needed
+        },
+    };    
 
     // setup connection pool
-    let pg_connection = PgConnection::connect(database_url).await;
+    let pg_connection = PgConnection::connect(db_url).await;
 
     let router = Router::new()
         .route("/", get(|| async { "Hello, World!" }))
