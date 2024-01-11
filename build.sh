@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ./bin
+
 # Define the array of names
 names=(
     "rust_axum_tokio-postgres"
@@ -17,7 +19,7 @@ for name in "${names[@]}"; do
     RUSTFLAGS="-C target-cpu=native" cargo build --release
 
     # Copy the binary to the parent directory
-    cp "./target/release/$name" ../
+    cp "./target/release/$name" ../bin
 
     # Go back to the original directory
     cd ..
