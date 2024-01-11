@@ -1,0 +1,649 @@
+gergo@dev:~/framework-test-at-home$ ./bench.sh 
+
+ === rust_axum_tokio-postgres_tech-empower on 3003 === 
+
+--- starting rust_axum_tokio-postgres_tech-empower on 3003 --- 
+
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+Started axum server at 3003
+--- plain text ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3003 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.25ms   0.09ms   0.01ms   1.45ms   
+  Requests:
+    Total: 6043284 Req/Sec: 201441.81
+  Transfer:
+    Total: 818.39 MB Transfer Rate: 27.28 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3003 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.22ms   0.08ms   0.01ms   2.63ms   
+  Requests:
+    Total: 6932138 Req/Sec: 231070.57
+  Transfer:
+    Total: 938.76 MB Transfer Rate: 31.29 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3003 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.19ms   0.07ms   0.01ms   1.48ms   
+  Requests:
+    Total: 7984676 Req/Sec: 266155.31
+  Transfer:
+    Total: 1.06 GB Transfer Rate: 36.04 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3003 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.23ms   0.08ms   0.01ms   1.16ms   
+  Requests:
+    Total: 6421430 Req/Sec: 214047.33
+  Transfer:
+    Total: 869.60 MB Transfer Rate: 28.99 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3003 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.21ms   0.07ms   0.01ms   1.52ms   
+  Requests:
+    Total: 7295844 Req/Sec: 243194.07
+  Transfer:
+    Total: 988.02 MB Transfer Rate: 32.93 MB/Sec
+
+--- single query ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3003/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.30ms   0.10ms   0.04ms   1.79ms   
+  Requests:
+    Total: 4993474 Req/Sec: 166445.84
+  Transfer:
+    Total: 557.17 MB Transfer Rate: 18.57 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3003/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.30ms   0.09ms   0.04ms   1.53ms   
+  Requests:
+    Total: 5030867 Req/Sec: 167692.47
+  Transfer:
+    Total: 561.34 MB Transfer Rate: 18.71 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3003/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.29ms   0.09ms   0.03ms   1.45ms   
+  Requests:
+    Total: 5116293 Req/Sec: 170544.45
+  Transfer:
+    Total: 570.88 MB Transfer Rate: 19.03 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3003/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.30ms   0.09ms   0.03ms   1.54ms   
+  Requests:
+    Total: 5055543 Req/Sec: 168513.45
+  Transfer:
+    Total: 564.10 MB Transfer Rate: 18.80 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3003/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.30ms   0.09ms   0.03ms   1.57ms   
+  Requests:
+    Total: 5029356 Req/Sec: 167646.09
+  Transfer:
+    Total: 561.18 MB Transfer Rate: 18.71 MB/Sec
+
+
+ === openresty on 2222 === 
+
+--- starting openresty on 2222 --- 
+
+--- plain text ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:2222 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.21ms   0.07ms   0.01ms   1.34ms   
+  Requests:
+    Total: 7114661 Req/Sec: 237149.19
+  Transfer:
+    Total: 1.22 GB Transfer Rate: 41.61 MB/Sec
+
+7089 Errors: connection closed
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:2222 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.23ms   0.07ms   0.02ms   1.61ms   
+  Requests:
+    Total: 6565102 Req/Sec: 218838.98
+  Transfer:
+    Total: 1.12 GB Transfer Rate: 38.40 MB/Sec
+
+6541 Errors: connection closed
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:2222 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.20ms   0.07ms   0.01ms   3.49ms   
+  Requests:
+    Total: 7450873 Req/Sec: 248357.84
+  Transfer:
+    Total: 1.28 GB Transfer Rate: 43.58 MB/Sec
+
+7428 Errors: connection closed
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:2222 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.21ms   0.07ms   0.02ms   2.43ms   
+  Requests:
+    Total: 7002836 Req/Sec: 233426.04
+  Transfer:
+    Total: 1.20 GB Transfer Rate: 40.96 MB/Sec
+
+6978 Errors: connection closed
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:2222 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.22ms   0.08ms   0.02ms   1.31ms   
+  Requests:
+    Total: 6730804 Req/Sec: 224355.62
+  Transfer:
+    Total: 1.15 GB Transfer Rate: 39.37 MB/Sec
+
+6705 Errors: connection closed
+
+--- single query: lua module ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:2222/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.45ms   0.17ms   0.09ms   24.87ms  
+  Requests:
+    Total: 3366897 Req/Sec: 112227.64
+  Transfer:
+    Total: 555.60 MB Transfer Rate: 18.52 MB/Sec
+
+3860 Errors: connection closed
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:2222/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.44ms   0.16ms   0.08ms   8.90ms   
+  Requests:
+    Total: 3377381 Req/Sec: 112578.81
+  Transfer:
+    Total: 557.34 MB Transfer Rate: 18.58 MB/Sec
+
+3892 Errors: connection closed
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:2222/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.45ms   0.16ms   0.09ms   4.41ms   
+  Requests:
+    Total: 3364407 Req/Sec: 112143.93
+  Transfer:
+    Total: 555.19 MB Transfer Rate: 18.51 MB/Sec
+
+3883 Errors: connection closed
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:2222/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.45ms   0.17ms   0.08ms   5.86ms   
+  Requests:
+    Total: 3343929 Req/Sec: 111463.68
+  Transfer:
+    Total: 551.77 MB Transfer Rate: 18.39 MB/Sec
+
+3696 Errors: connection closed
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:2222/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.45ms   0.17ms   0.09ms   5.56ms   
+  Requests:
+    Total: 3309120 Req/Sec: 110303.87
+  Transfer:
+    Total: 546.05 MB Transfer Rate: 18.20 MB/Sec
+
+3742 Errors: connection closed
+
+--- single query: postgres module ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:2222/count2 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.47ms   0.50ms   0.08ms   28.15ms  
+  Requests:
+    Total: 3193493 Req/Sec: 106447.52
+  Transfer:
+    Total: 526.87 MB Transfer Rate: 17.56 MB/Sec
+
+3168 Errors: connection closed
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:2222/count2 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.47ms   0.46ms   0.08ms   19.87ms  
+  Requests:
+    Total: 3193015 Req/Sec: 106431.67
+  Transfer:
+    Total: 526.80 MB Transfer Rate: 17.56 MB/Sec
+
+3168 Errors: connection closed
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:2222/count2 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.48ms   0.51ms   0.08ms   20.33ms  
+  Requests:
+    Total: 3104668 Req/Sec: 103488.80
+  Transfer:
+    Total: 512.27 MB Transfer Rate: 17.08 MB/Sec
+
+3080 Errors: connection closed
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:2222/count2 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.46ms   0.45ms   0.08ms   19.96ms  
+  Requests:
+    Total: 3240636 Req/Sec: 108020.97
+  Transfer:
+    Total: 534.68 MB Transfer Rate: 17.82 MB/Sec
+
+3216 Errors: connection closed
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:2222/count2 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.48ms   0.48ms   0.08ms   19.55ms  
+  Requests:
+    Total: 3152268 Req/Sec: 105072.05
+  Transfer:
+    Total: 520.10 MB Transfer Rate: 17.34 MB/Sec
+
+3127 Errors: connection closed
+
+
+ === rust_axum_tokio-postgres_prefork on 3002 === 
+
+--- starting rust_axum_tokio-postgres_prefork on 3002 --- 
+
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+Started axum server at 3002
+--- plain text ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3002 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.24ms   0.08ms   0.01ms   1.44ms   
+  Requests:
+    Total: 6282582 Req/Sec: 209415.79
+  Transfer:
+    Total: 820.84 MB Transfer Rate: 27.36 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3002 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.21ms   0.08ms   0.01ms   1.82ms   
+  Requests:
+    Total: 7224122 Req/Sec: 240798.24
+  Transfer:
+    Total: 943.86 MB Transfer Rate: 31.46 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3002 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.22ms   0.08ms   0.01ms   1.62ms   
+  Requests:
+    Total: 6821028 Req/Sec: 227363.82
+  Transfer:
+    Total: 891.19 MB Transfer Rate: 29.71 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3002 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.18ms   0.06ms   0.01ms   1.16ms   
+  Requests:
+    Total: 8509812 Req/Sec: 283653.15
+  Transfer:
+    Total: 1.09 GB Transfer Rate: 37.06 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3002 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.19ms   0.07ms   0.01ms   1.47ms   
+  Requests:
+    Total: 7947233 Req/Sec: 264906.98
+  Transfer:
+    Total: 1.01 GB Transfer Rate: 34.61 MB/Sec
+
+--- single query ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3002/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.29ms   0.09ms   0.04ms   1.50ms   
+  Requests:
+    Total: 5099937 Req/Sec: 169994.21
+  Transfer:
+    Total: 569.05 MB Transfer Rate: 18.97 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3002/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.30ms   0.09ms   0.04ms   2.33ms   
+  Requests:
+    Total: 5046978 Req/Sec: 168232.67
+  Transfer:
+    Total: 563.14 MB Transfer Rate: 18.77 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3002/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.29ms   0.09ms   0.04ms   2.18ms   
+  Requests:
+    Total: 5214988 Req/Sec: 173831.61
+  Transfer:
+    Total: 581.89 MB Transfer Rate: 19.40 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3002/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.29ms   0.09ms   0.03ms   1.62ms   
+  Requests:
+    Total: 5220656 Req/Sec: 174022.73
+  Transfer:
+    Total: 582.52 MB Transfer Rate: 19.42 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3002/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.29ms   0.09ms   0.03ms   1.87ms   
+  Requests:
+    Total: 5093623 Req/Sec: 169786.32
+  Transfer:
+    Total: 568.35 MB Transfer Rate: 18.94 MB/Sec
+
+
+ === rust_axum_tokio-postgres_arc on 3001 === 
+
+--- starting rust_axum_tokio-postgres_arc on 3001 --- 
+
+Started axum server at 3001
+--- plain text ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3001 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.22ms   0.08ms   0.01ms   2.31ms   
+  Requests:
+    Total: 6701739 Req/Sec: 223388.23
+  Transfer:
+    Total: 850.04 MB Transfer Rate: 28.33 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3001 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.18ms   0.06ms   0.01ms   2.10ms   
+  Requests:
+    Total: 8133544 Req/Sec: 271119.89
+  Transfer:
+    Total: 1.01 GB Transfer Rate: 34.39 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3001 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.18ms   0.06ms   0.01ms   2.26ms   
+  Requests:
+    Total: 8213264 Req/Sec: 273774.55
+  Transfer:
+    Total: 1.02 GB Transfer Rate: 34.73 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3001 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.19ms   0.07ms   0.01ms   1.47ms   
+  Requests:
+    Total: 7902832 Req/Sec: 263426.18
+  Transfer:
+    Total: 1002.38 MB Transfer Rate: 33.41 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3001 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.22ms   0.08ms   0.01ms   1.97ms   
+  Requests:
+    Total: 6939030 Req/Sec: 231298.17
+  Transfer:
+    Total: 880.14 MB Transfer Rate: 29.34 MB/Sec
+
+--- single query ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3001/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.61ms   0.09ms   0.19ms   2.00ms   
+  Requests:
+    Total: 2457123 Req/Sec: 81902.86
+  Transfer:
+    Total: 274.17 MB Transfer Rate: 9.14 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3001/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.63ms   0.08ms   0.08ms   2.03ms   
+  Requests:
+    Total: 2371585 Req/Sec: 79053.15
+  Transfer:
+    Total: 264.62 MB Transfer Rate: 8.82 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3001/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.63ms   0.10ms   0.07ms   2.28ms   
+  Requests:
+    Total: 2366767 Req/Sec: 78892.33
+  Transfer:
+    Total: 264.08 MB Transfer Rate: 8.80 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3001/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.62ms   0.09ms   0.08ms   2.44ms   
+  Requests:
+    Total: 2417373 Req/Sec: 80578.08
+  Transfer:
+    Total: 269.73 MB Transfer Rate: 8.99 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3001/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.62ms   0.06ms   0.08ms   2.52ms   
+  Requests:
+    Total: 2427799 Req/Sec: 80926.89
+  Transfer:
+    Total: 270.89 MB Transfer Rate: 9.03 MB/Sec
+
+
+ === rust_axum_tokio-postgres_bb8 on 3000 === 
+
+--- starting rust_axum_tokio-postgres_bb8 on 3000 --- 
+
+Started axum server at 3000
+--- plain text ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3000 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.23ms   0.08ms   0.01ms   1.26ms   
+  Requests:
+    Total: 6376411 Req/Sec: 212543.32
+  Transfer:
+    Total: 808.78 MB Transfer Rate: 26.96 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3000 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.20ms   0.07ms   0.01ms   1.79ms   
+  Requests:
+    Total: 7680776 Req/Sec: 256021.60
+  Transfer:
+    Total: 974.22 MB Transfer Rate: 32.47 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3000 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.20ms   0.07ms   0.01ms   4.02ms   
+  Requests:
+    Total: 7490069 Req/Sec: 249668.45
+  Transfer:
+    Total: 950.03 MB Transfer Rate: 31.67 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3000 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.24ms   0.08ms   0.01ms   14.56ms  
+  Requests:
+    Total: 6185608 Req/Sec: 206183.57
+  Transfer:
+    Total: 784.57 MB Transfer Rate: 26.15 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3000 for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.21ms   0.07ms   0.01ms   1.64ms   
+  Requests:
+    Total: 7155673 Req/Sec: 238523.24
+  Transfer:
+    Total: 907.62 MB Transfer Rate: 30.25 MB/Sec
+
+--- single query ---
+
+Beginning round 1...
+Benchmarking 50 connections @ http://localhost:3000/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.67ms   0.21ms   0.18ms   11.23ms  
+  Requests:
+    Total: 2247309 Req/Sec: 74908.88
+  Transfer:
+    Total: 250.75 MB Transfer Rate: 8.36 MB/Sec
+
+Beginning round 2...
+Benchmarking 50 connections @ http://localhost:3000/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.67ms   0.21ms   0.18ms   9.16ms   
+  Requests:
+    Total: 2240320 Req/Sec: 74677.78
+  Transfer:
+    Total: 249.97 MB Transfer Rate: 8.33 MB/Sec
+
+Beginning round 3...
+Benchmarking 50 connections @ http://localhost:3000/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.67ms   0.20ms   0.18ms   10.31ms  
+  Requests:
+    Total: 2247492 Req/Sec: 74915.44
+  Transfer:
+    Total: 250.77 MB Transfer Rate: 8.36 MB/Sec
+
+Beginning round 4...
+Benchmarking 50 connections @ http://localhost:3000/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.67ms   0.20ms   0.17ms   8.03ms   
+  Requests:
+    Total: 2241736 Req/Sec: 74723.59
+  Transfer:
+    Total: 250.13 MB Transfer Rate: 8.34 MB/Sec
+
+Beginning round 5...
+Benchmarking 50 connections @ http://localhost:3000/count for 30 second(s)
+  Latencies:
+    Avg      Stdev    Min      Max      
+    0.68ms   0.21ms   0.18ms   10.87ms  
+  Requests:
+    Total: 2220450 Req/Sec: 74015.76
+  Transfer:
+    Total: 247.76 MB Transfer Rate: 8.26 MB/Sec
