@@ -1,5 +1,5 @@
 [package]
-name = "axum"
+name = "rust_axum_tokio-postgres_tech-empower"
 version = "0.2.0"
 authors = ["Dragos Varovici <dvarovici.work@gmail.com>"]
 edition = "2021"

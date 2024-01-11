@@ -1,5 +1,5 @@
 [package]
-name = "example-sqlx-postgres"
+name = "rust_axum_sqlx-postgres"
 version = "0.1.0"
 edition = "2021"
 publish = false

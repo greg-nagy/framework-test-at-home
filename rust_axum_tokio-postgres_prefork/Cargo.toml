@@ -1,5 +1,5 @@
 [package]
-name = "axum"
+name = "rust_axum_tokio-postgres_prefork"
 version = "0.2.0"
 authors = ["Greg Nagy<greg@dhamma.works>"]
 edition = "2021"
