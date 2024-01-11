@@ -22,7 +22,7 @@ async fn main() {
     let db_url = match env::var("DB_URL") {
         Ok(value) => value,
         Err(e) => {
-            println!("Couldn't read MY_ENV_VAR ({})", e);
+            println!("Couldn't read DB_URL ({})", e);
             return; // or handle the error as needed
         },
     };
@@ -34,6 +34,6 @@ async fn main() {
         .route("/count", get(count))
         .with_state(pg_connection);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3001").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }

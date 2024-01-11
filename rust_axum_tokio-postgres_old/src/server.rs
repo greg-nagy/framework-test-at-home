@@ -7,7 +7,7 @@ use hyper::server::conn::AddrIncoming;
 use tokio::net::{TcpListener, TcpSocket};
 
 pub fn builder() -> hyper::server::Builder<AddrIncoming> {
-    let addr = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3000));
+    let addr = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3003));
     let listener = reuse_listener(addr).expect("couldn't bind to addr");
     let incoming = AddrIncoming::from_listener(listener).unwrap();
 
