@@ -1,5 +1,5 @@
 [package]
-name = "rust_axum_tokio-postgres"
+name = "rust_axum_tokio-postgres_arc"
 version = "0.2.0"
 authors = ["Greg Nagy<greg@dhamma.works>"]
 edition = "2021"

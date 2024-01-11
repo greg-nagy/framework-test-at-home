@@ -12,35 +12,69 @@ is_port_free() {
 
 # Define an associative array for names and corresponding ports
 declare -A names_ports=(
+    ["openresty"]=2222
     ["rust_axum_tokio-postgres_bb8"]=3000
-    ["rust_axum_tokio-postgres"]=3001
-    ["rust_axum_tokio-postgres_prefork"]=3002
+    ["rust_axum_tokio-postgres_arc"]=3001
     ["rust_axum_tokio-postgres_tech-empower"]=3003
+    ["rust_axum_tokio-postgres_prefork"]=3002
 )
 
-# Iterate over each name and port
+# 50 concurency, 2 threads, 30s duration, 5 rounds
+test_command_with_base_host="rewrk -c 50 -t 2 -d 30s -r 5 -h http://localhost"
+
+# Check if DB_URL is set in the current shell. Rust examples won't work without it
+if [ -z "$DB_URL" ]; then
+    echo "Error: DB_URL is not set."
+    exit 1
+fi
+
 for name in "${!names_ports[@]}"; do
     port=${names_ports[$name]}
 
-    echo "Checking $name on port $port"
-
     if is_port_free $port; then
-        echo "Starting $name on port $port"
+        echo -e "\n === $name on $port === \n"
 
-        # Start the app in background mode on the specified port
-        PORT=$port ./bin/"$name" &
+        echo -e "--- starting $name on $port --- \n"
 
-        # Store the pid
-        pid=$!
+        # let's start the app to test
+        if [ "$name" != "openresty" ]; then 
+            ./bin/"$name" &
+        else 
+            /usr/local/openresty/bin/openresty
+        fi
 
-        # Run the benchmark on the specified port
-        rewrk -c 50 -t 2 -d 30s -h http://localhost:$port
+        sleep 1
 
-        # Kill the app 
-        kill -9 "$pid"
+        echo -e "--- plain text ---\n"
+
+        $test_command_with_base_host:$port
+
+        if [ "$name" != "openresty" ]; then
+            echo -e "--- single query ---\n"
+
+            $test_command_with_base_host:$port/count
+        else
+            echo -e "--- single query: lua module ---\n"
+
+            $test_command_with_base_host:$port/count
+
+            # restart openresty
+            # If the tests are run on both endpoints the 2nd endpoint becomes really slow
+            /usr/local/openresty/bin/openresty -s stop
+            /usr/local/openresty/bin/openresty
+
+            echo -e "--- single query: postgres module ---\n"
+
+            $test_command_with_base_host:$port/count2
+        fi    
+
+        # cleanup
+        if [ "$name" != "openresty" ]; then
+            killall rust_axum_tokio-postgres
+        else 
+            /usr/local/openresty/bin/openresty -s stop
+        fi
     else
         echo "Port $port is in use, skipping $name"
     fi
 done
-
-echo -e "\n\n\n === All processes completed. === \n\n\n"
