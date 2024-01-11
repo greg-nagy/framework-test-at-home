@@ -50,7 +50,7 @@ async fn serve() {
     let pg_connection = PgConnection::connect(db_url).await;
 
     let router = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
+        .route("/", get(|| async { "Hello tech-empower :3003!" }))
         .route("/count", get(count))
         .with_state(pg_connection);
 

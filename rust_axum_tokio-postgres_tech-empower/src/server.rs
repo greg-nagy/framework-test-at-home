@@ -11,7 +11,7 @@ pub fn builder() -> hyper::server::Builder<AddrIncoming> {
     let listener = reuse_listener(addr).expect("couldn't bind to addr");
     let incoming = AddrIncoming::from_listener(listener).unwrap();
 
-    println!("Started axum server at 3000");
+    println!("Started axum server at 3003");
 
     axum::Server::builder(incoming)
         .http1_only(true)

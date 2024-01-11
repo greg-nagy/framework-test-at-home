@@ -4,8 +4,8 @@ mkdir -p ./bin
 
 # Define the array of names
 names=(
-    "rust_axum_tokio-postgres"
     "rust_axum_tokio-postgres_bb8"
+    "rust_axum_tokio-postgres_arc"
     "rust_axum_tokio-postgres_prefork"
     "rust_axum_tokio-postgres_tech-empower"
 )

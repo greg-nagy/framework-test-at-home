@@ -42,21 +42,21 @@ async fn serve() {
         Ok(value) => value,
         Err(e) => {
             println!("Couldn't read DB_URL ({})", e);
-            return; // or handle the error as needed
+             std::process::exit(0);
         },
     };
 
     let pg_connection = PgConnection::connect(db_url).await;
 
     let app = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
+        .route("/", get(|| async { "Hello prefork :3002!" }))
         .route("/count", get(count))
         .with_state(pg_connection);
 
     let addr = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3002));
     let listener = reuse_listener(addr).expect("couldn't bind to addr");
 
-    println!("Started axum server at 3000");
+    println!("Started axum server at 3002");
 
     axum::serve(listener, app).await.unwrap();
 }

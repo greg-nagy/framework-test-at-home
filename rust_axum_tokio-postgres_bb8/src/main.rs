@@ -29,9 +29,12 @@ async fn main() {
 
     // build our application with some routes
     let app = Router::new()
-        .route( "/", get(|| async { "Hello world!" }))
+        .route( "/", get(|| async { "Hello bb8 :3000!" }))
         .route( "/count", get(fetch_count))
         .with_state(pool);
+
+
+    println!("Started axum server at 3000");
 
     // run it
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")

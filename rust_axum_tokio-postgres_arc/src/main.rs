@@ -30,9 +30,11 @@ async fn main() {
     let pg_connection = PgConnection::connect(db_url).await;
 
     let app = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
+        .route("/", get(|| async { "Hello ard :3001!" }))
         .route("/count", get(count))
         .with_state(pg_connection);
+
+    println!("Started axum server at 3001");
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3001").await.unwrap();
     axum::serve(listener, app).await.unwrap();
