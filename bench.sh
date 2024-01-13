@@ -15,8 +15,12 @@ declare -A names_ports=(
     ["openresty"]=2222
     ["rust_axum_tokio-postgres_bb8"]=3000
     ["rust_axum_tokio-postgres_arc"]=3001
-    ["rust_axum_tokio-postgres_tech-empower"]=3003
     ["rust_axum_tokio-postgres_prefork"]=3002
+    ["rust_axum_tokio-postgres_tech-empower"]=3003
+    ["go_fiber_pgxpool"]=3004
+    ["node_fastify_pg"]=3005
+    ["bun_elysia_pg"]=3006
+    ["go_nethttp_pgxpool"]=3007
 )
 
 # 50 concurency, 2 threads, 30s duration, 5 rounds
@@ -37,11 +41,22 @@ for name in "${!names_ports[@]}"; do
         echo -e "--- starting $name on $port --- \n"
 
         # let's start the app to test
-        if [ "$name" != "openresty" ]; then 
-            ./bin/"$name" &
-        else 
-            /usr/local/openresty/bin/openresty
-        fi
+        case "$name" in
+            "openresty")
+                /usr/local/openresty/bin/openresty
+                ;;
+            "node_fastify_pg")
+                node ./node_fastify_pg/index.js &
+                ;;
+            "bun_elysia_pg")
+                bun ./bun_elysia_pg/index.ts &
+                ;;
+            *)
+                ./bin/"$name" &
+                ;;
+        esac
+
+        pid=$!
 
         sleep 1
 
@@ -49,11 +64,7 @@ for name in "${!names_ports[@]}"; do
 
         $test_command_with_base_host:$port
 
-        if [ "$name" != "openresty" ]; then
-            echo -e "--- single query ---\n"
-
-            $test_command_with_base_host:$port/count
-        else
+        if [ "$name" == "openresty" ]; then
             echo -e "--- single query: lua module ---\n"
 
             $test_command_with_base_host:$port/count
@@ -66,13 +77,17 @@ for name in "${!names_ports[@]}"; do
             echo -e "--- single query: postgres module ---\n"
 
             $test_command_with_base_host:$port/count2
+        else
+            echo -e "--- single query ---\n"
+
+            $test_command_with_base_host:$port/count
         fi    
 
         # cleanup
-        if [ "$name" != "openresty" ]; then
-            killall rust_axum_tokio-postgres
-        else 
+        if [ "$name" == "openresty" ]; then
             /usr/local/openresty/bin/openresty -s stop
+        else 
+            kill -9 "$pid"
         fi
     else
         echo "Port $port is in use, skipping $name"
