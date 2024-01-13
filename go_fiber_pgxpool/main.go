@@ -2,6 +2,7 @@ package main
 
 import (
     "context"
+    "os"
     "log"
     "strconv"
 
@@ -10,11 +11,15 @@ import (
 )
 
 func main() {
-    // PostgreSQL connection string
-    dbConnString := "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev"
+    dbConnString := os.Getenv("DB_URL")
+    if dbConnString == "" {
+        log.Fatal("DB_URL environment variable is not set")
+    }
 
     // Create a new Fiber app
-    app := fiber.New()
+    app := fiber.New(fiber.Config{
+        Prefork: true,
+    })
 
     // Connect to the database
     dbPool, err := pgxpool.Connect(context.Background(), dbConnString)
@@ -27,13 +32,13 @@ func main() {
     setupRoutes(app, dbPool)
 
     // Start the server on localhost port 3000
-    log.Fatal(app.Listen(":3000"))
+    log.Fatal(app.Listen(":3004"))
 }
 
 func setupRoutes(app *fiber.App, dbPool *pgxpool.Pool) {
     // Route for '/'
     app.Get("/", func(c *fiber.Ctx) error {
-        return c.SendString("Hello World")
+        return c.SendString("Hello go_fiber :3004")
     })
 
     // Route for '/count'

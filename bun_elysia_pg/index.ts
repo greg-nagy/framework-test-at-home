@@ -2,14 +2,14 @@ import { Elysia } from 'elysia';
 import pg from 'pg';
 
 // PostgreSQL connection string
-const connectionString = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev";
+const connectionString = process.env.DB_URL;
 
 // Create a new PostgreSQL pool
 const pool = new pg.Pool({ connectionString });
 
 const app = new Elysia();
 
-app.get('/', async () => 'Hello World');
+app.get('/', async () => 'Hello bun :3006');
 
 app.get('/count', async () => {
   try {
@@ -22,7 +22,10 @@ app.get('/count', async () => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+app.listen({
+        port: 3006,
+        hostname: '0.0.0.0'
+    }, () => {
+  console.log('Server running on http://localhost:3006');
 });
 

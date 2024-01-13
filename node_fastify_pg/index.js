@@ -1,9 +1,7 @@
 const fastify = require("fastify")({ logger: false });
 const { Pool } = require("pg");
 
-// PostgreSQL connection string
-const connectionString =
-  "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev";
+const connectionString = process.env.DB_URL;
 
 // Create a new pool instance
 const pool = new Pool({
@@ -11,7 +9,7 @@ const pool = new Pool({
 });
 
 fastify.get("/", async (request, reply) => {
-  return "Hello World";
+  return "Hello fastify :3005";
 });
 
 fastify.get("/count", async (request, reply) => {
@@ -28,7 +26,7 @@ fastify.get("/count", async (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000, host: "0.0.0.0" });
+    await fastify.listen({ port: 3005, host: "0.0.0.0" });
     console.log(`Server listening on ${fastify.server.address().port}`);
   } catch (err) {
     fastify.log.error(err);

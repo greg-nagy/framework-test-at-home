@@ -30,7 +30,7 @@ async fn main() {
     let pg_connection = PgConnection::connect(db_url).await;
 
     let app = Router::new()
-        .route("/", get(|| async { "Hello ard :3001!" }))
+        .route("/", get(|| async { "Hello arc :3001!" }))
         .route("/count", get(count))
         .with_state(pg_connection);
 

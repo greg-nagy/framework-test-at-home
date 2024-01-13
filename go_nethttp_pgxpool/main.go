@@ -3,14 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+    "os"
 	"log"
 	"net/http"
 
 	"github.com/jackc/pgx/v4/pgxpool"
-)
-
-const (
-    dbConnectionString = "postgresql://postgres:postgres@database.cdgerttxp3su.eu-central-1.rds.amazonaws.com:5432/portal_dev"
 )
 
 type CountResult struct {
@@ -18,14 +15,19 @@ type CountResult struct {
 }
 
 func main() {
-    dbpool, err := pgxpool.Connect(context.Background(), dbConnectionString)
+    dbConnString := os.Getenv("DB_URL")
+    if dbConnString == "" {
+        log.Fatal("DB_URL environment variable is not set")
+    }
+
+    dbpool, err := pgxpool.Connect(context.Background(), dbConnString)
     if err != nil {
         log.Fatalf("Unable to connect to database: %v\n", err)
     }
     defer dbpool.Close()
 
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello World")
+        fmt.Fprintf(w, "Hello go_nethttp :3007")
     })
 
     http.HandleFunc("/count", func(w http.ResponseWriter, r *http.Request) {
@@ -39,5 +41,5 @@ func main() {
         fmt.Fprintf(w, "%d", count)
     })
 
-    log.Fatal(http.ListenAndServe(":3000", nil))
+    log.Fatal(http.ListenAndServe(":3007", nil))
 }
